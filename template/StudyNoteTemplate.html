@@ -1,0 +1,11 @@
+<dl ng-class="{'content-list':true,'mt10':$index!=0}" ng-repeat="note in content.noteList">
+    <dt class="title ft16">{{note.title}}</dt>
+    <dd class="note-wrap ft14">
+        <div class="note" ng-repeat="item in note.items">
+            <div class="txt" ng-if="item.showStyle=='txt'">{{item.specContent}}</div>
+            <div class="img" ng-if="item.showStyle=='img'">
+                <img src="{{item.specContent}}" width="100%" alt="">
+            </div>
+        </div>
+    </dd>
+</dl>

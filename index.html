@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+	<title>随时学</title>
+    <!--<link rel="stylesheet" href="css/ionic.css" />-->
+    <style type="text/css">
+        *{ margin: 0; padding: 0; list-style: none; font-family: "黑体";}
+        .fl{ float: left;}
+        .fr{ float: right;}
+        .clear:after{ clear: both; display: block; content: "";}
+        a{ text-decoration: none; color: #666;}
+
+        .ft16{ font-size: 16px;}
+        .ft14{ font-size: 14px;}
+        .ft12{ font-size: 12px;}
+
+        .slide{ width: 50%; position: absolute; left: -50%; top: 0; height: 100%; overflow-y: scroll; border-right: 3px; box-shadow: 0 3px 3px #ccc; background: #fff; transition: 0.3s;}
+        .slide.in{ left: 0;}
+        .study-list .study-title{ height: 40px; border-bottom: 1px solid #eee; line-height: 40px; padding-left: 10px; text-shadow: 1px 1px 2px #888;}
+        .study-list .study-item{ height: 30px; line-height: 30px; padding-left: 20px; padding-right: 20px;}
+        .study-list .study-item.active{ background: #eef;}
+        .content{ margin: 10px; }
+        .content-list .title{ background: #666; color: #eee; line-height: 30px; text-align: left; padding-left: 10px;}
+        .content-list .note-wrap{ padding: 10px; border: 1px solid #666;}
+        .content-list.mt10{ margin-top: 10px;}
+    </style>
+    <!--<script type="text/javascript" src="js/libs/ionic.bundle.js"></script>-->
+    <script type="text/javascript" src="js/libs/angular.js"></script>
+    <script type="text/javascript" src="js/libs/angular-local-storage.js"></script>
+    <script type="text/javascript" src="js/libs/angular-touch.js"></script>
+    <script type="text/javascript" src="js/libs/angular-animate.js"></script>
+    <script type="text/javascript">
+        var lbt = angular.module("lbt", ["ngTouch","ngAnimate"]);
+    </script>
+    <script type="text/javascript" src="js/Constant.js"></script>
+    <script type="text/javascript" src="js/DataServices/DeepIntoCodeData.js"></script>
+    <script type="text/javascript" src="js/DataServices/DeepIntoComputerData.js"></script>
+    <script type="text/javascript" src="js/CatalogService.js"></script>
+    <script type="text/javascript" src="js/MainController.js"></script>
+    <script type="text/javascript" src="js/StudyNoteDirective.js"></script>
+</head>
+<body ng-app="lbt">
+    <div class="study-container" ng-controller="MainController">
+        <div class="study" ng-swipe-right="fnSwipeRight($event)">
+            <div ng-swipe-left="fnSwipeLeft($event)" ng-class="{'slide':true,'in':animateData.slide}">
+                <dl class="study-list" ng-repeat="(index1,item) in catalogData">
+                    <dt class="study-title ft14">{{item.name}}</dt>
+                    <dd ng-class="{'clear': true,'study-item': true,'active': chapter.active}" ng-repeat="(index2,chapter) in item.chapters" ng-click="fnSwipeLeft(e,index1,index2)">
+                        <a href="javascript:;" class="fl ft12">{{chapter.name}}</a>
+                        <span class="fr ft12">2-45%</span>
+                    </dd>
+                </dl>
+            </div>
+            <div class="content">
+                <study-note content="curNote" ng-model="curNote"></study-note>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
