@@ -18,8 +18,8 @@ lbt.service("DeepIntoCodeData",[function(){
                         showStyle: "txt",
                         specContent: "二进制具体内容"
                     },{
-                        showStyle: "img",
-                        specContent: "aaa.png"
+                        showStyle: "txt",
+                        specContent: "xxx"
                     }]
                 }]
             }
